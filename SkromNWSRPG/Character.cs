@@ -28,5 +28,17 @@ namespace SkromNWSRPG
      */
     public class Character
     {
+        public string Name;
+        public int Life;
+
+        public void Equip(string equipement)
+        {
+            
+        }
+
+        public void GetItemInSlot(string GearSlot)
+        {
+            
+        }
     }
 }
