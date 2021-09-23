@@ -29,16 +29,87 @@ namespace SkromNWSRPG
     public class Character
     {
         public string Name;
-        public int Life;
+        public int Life = 100;
+        public Dictionary<GearSlot, Gear> Inventory = new Dictionary<GearSlot, Gear>();
+        public bool flag = false;
 
-        public void Equip(string equipement)
+
+        public Character(string name, int life)
         {
-            
+            Name = name;
+            Life = life;
         }
 
-        public void GetItemInSlot(string GearSlot)
+        public void Equip(Gear equipment)
         {
-            
+
+            switch (equipment.Slot)
+            {
+                case GearSlot.TwoHand:
+                    Inventory[GearSlot.Weapon] = equipment;
+                    Inventory[GearSlot.OffHand] = null;
+                    break;
+
+                case GearSlot.Weapon:
+                    if (this.flag == true)
+                    {
+                        Inventory[GearSlot.OffHand] = equipment;
+                        this.flag = false;
+                    }
+                    else
+                    {
+                        Inventory[GearSlot.Weapon] = equipment;
+                        this.flag = true;
+                    }
+                    Inventory[GearSlot.TwoHand] = null;
+                    break;
+
+                case GearSlot.OffHand:
+                    Inventory[GearSlot.OffHand] = equipment;
+                    Inventory[GearSlot.Weapon] = null;
+                    break;
+
+                case GearSlot.Head:
+                    Inventory[GearSlot.Head] = equipment;
+                    break;
+
+                case GearSlot.Back:
+                    Inventory[GearSlot.Back] = equipment;
+                    break;
+
+                case GearSlot.Chest:
+                    Inventory[GearSlot.Chest] = equipment;
+                    break;
+
+                case GearSlot.Legs:
+                    Inventory[GearSlot.Legs] = equipment;
+                    break;
+
+                case GearSlot.Feet:
+                    Inventory[GearSlot.Feet] = equipment;
+                    break;
+
+                default:
+                    Console.WriteLine("Erreur, ce n'est pas une arme ou armure");
+                    break;
+            }
+        }
+
+        public Gear GetItemInSlot(GearSlot slot)
+        {
+            if (Inventory[slot] != null)
+            {
+                return Inventory[slot];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void CleanInventory()
+        {
+
         }
     }
 }

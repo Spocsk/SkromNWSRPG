@@ -14,5 +14,6 @@ namespace SkromNWSRPG
      */
     public abstract class Gear : Item
     {
+        public GearSlot Slot;
     }
 }
